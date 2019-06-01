@@ -1,6 +1,5 @@
 package com.habitrpg.android.habitica.ui.fragments.social.party
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -22,20 +21,18 @@ import com.habitrpg.android.habitica.models.user.User
 import com.habitrpg.android.habitica.modules.AppModule
 import com.habitrpg.android.habitica.ui.fragments.BaseFragment
 import com.habitrpg.android.habitica.ui.fragments.inventory.items.ItemRecyclerFragment
-import com.habitrpg.android.habitica.ui.helpers.DataBindingUtils
-import com.habitrpg.android.habitica.ui.helpers.MarkdownParser
-import com.habitrpg.android.habitica.ui.helpers.bindView
-import com.habitrpg.android.habitica.ui.helpers.resetViews
+import com.habitrpg.android.habitica.ui.helpers.*
 import com.habitrpg.android.habitica.ui.viewmodels.PartyViewModel
+import com.habitrpg.android.habitica.ui.views.HabiticaAlertDialog
 import com.habitrpg.android.habitica.ui.views.social.OldQuestProgressView
 import io.reactivex.functions.Consumer
 import javax.inject.Inject
 import javax.inject.Named
 
 
-class PartyDetailFragment constructor() : BaseFragment() {
+class PartyDetailFragment : BaseFragment() {
 
-    lateinit var viewModel: PartyViewModel
+    var viewModel: PartyViewModel? = null
 
     @Inject
     lateinit var inventoryRepository: InventoryRepository
@@ -51,7 +48,7 @@ class PartyDetailFragment constructor() : BaseFragment() {
     private val newQuestButton: Button? by bindView(R.id.new_quest_button)
     private val questDetailButton: ViewGroup? by bindView(R.id.quest_detail_button)
     private val questScrollImageView: SimpleDraweeView? by bindView(R.id.quest_scroll_image_view)
-    private val questTitleView: TextView? by bindView(R.id.quest_title_view)
+    private val questTitleView: TextView? by bindOptionalView(R.id.quest_title_view)
     private val questParticipationView: TextView? by bindView(R.id.quest_participation_view)
     private val questImageWrapper: ViewGroup? by bindView(R.id.quest_image_wrapper)
     private val questImageView: SimpleDraweeView? by bindView(R.id.quest_image_view)
@@ -89,17 +86,13 @@ class PartyDetailFragment constructor() : BaseFragment() {
         newQuestButton?.setOnClickListener { inviteNewQuest() }
         questDetailButton?.setOnClickListener { questDetailButtonClicked() }
         leaveButton?.setOnClickListener { leaveParty() }
-    }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        viewModel.getGroupData().observe(viewLifecycleOwner, Observer { updateParty(it) })
-        viewModel.getUserData().observe(viewLifecycleOwner, Observer { updateUser(it) })
+        viewModel?.getGroupData()?.observe(viewLifecycleOwner, Observer { updateParty(it) })
+        viewModel?.getUserData()?.observe(viewLifecycleOwner, Observer { updateUser(it) })
     }
 
     private fun refreshParty() {
-        viewModel.retrieveGroup {
+        viewModel?.retrieveGroup {
             refreshLayout?.isRefreshing = false
         }
     }
@@ -158,7 +151,7 @@ class PartyDetailFragment constructor() : BaseFragment() {
     }
 
     private fun showParticipantButtons(): Boolean {
-        return viewModel.showParticipantButtons()
+        return viewModel?.showParticipantButtons() ?: false
     }
 
     private fun updateQuestContent(questContent: QuestContent) {
@@ -172,11 +165,11 @@ class PartyDetailFragment constructor() : BaseFragment() {
         } else {
             DataBindingUtils.loadImage(questImageView, "quest_" + questContent.key)
         }
-        if (viewModel.isQuestActive) {
+        if (viewModel?.isQuestActive == true) {
             questProgressView?.visibility = View.VISIBLE
-            questProgressView?.setData(questContent, viewModel.getGroupData().value?.quest?.progress)
+            questProgressView?.setData(questContent, viewModel?.getGroupData()?.value?.quest?.progress)
 
-            questParticipationView?.text = getString(R.string.number_participants, viewModel.getGroupData().value?.quest?.members?.size)
+            questParticipationView?.text = context?.getString(R.string.number_participants, viewModel?.getGroupData()?.value?.quest?.members?.size)
         } else {
             questProgressView?.visibility = View.GONE
         }
@@ -190,37 +183,41 @@ class PartyDetailFragment constructor() : BaseFragment() {
     }
 
     private fun leaveParty() {
-        val builder = AlertDialog.Builder(activity)
-                .setMessage(R.string.leave_party_confirmation)
-                .setPositiveButton(R.string.yes) { _, _ ->
-                    viewModel.leaveGroup { }
-                }.setNegativeButton(R.string.no) { _, _ -> }
-        builder.show()
+        val context = context
+        if (context != null) {
+            val alert = HabiticaAlertDialog(context)
+            alert.setMessage(R.string.leave_party_confirmation)
+            alert.addButton(R.string.yes, true) { _, _ ->
+                viewModel?.leaveGroup { }
+            }
+            alert.addButton(R.string.no, false)
+            alert.show()
+        }
     }
 
     private fun onQuestAccept() {
-        viewModel.acceptQuest()
+        viewModel?.acceptQuest()
     }
 
 
     private fun onQuestReject() {
-        viewModel.rejectQuest()
+        viewModel?.rejectQuest()
     }
 
     private fun onPartyInviteAccepted() {
-        viewModel.getUserData().value?.invitations?.party?.id.notNull {
-            viewModel.joinGroup(it)
+        viewModel?.getUserData()?.value?.invitations?.party?.id.notNull {
+            viewModel?.joinGroup(it)
         }
     }
 
     private fun onPartyInviteRejected() {
-        viewModel.getUserData().value?.invitations?.party?.id.notNull {
-            viewModel.rejectGroupInvite(it)
+        viewModel?.getUserData()?.value?.invitations?.party?.id.notNull {
+            viewModel?.rejectGroupInvite(it)
         }
     }
 
     private fun questDetailButtonClicked() {
-        viewModel.getGroupData().value.notNull { party ->
+        viewModel?.getGroupData()?.value.notNull { party ->
             MainNavigationController.navigate(PartyFragmentDirections.openQuestDetail(party.id, party.quest?.key ?: ""))
         }
     }

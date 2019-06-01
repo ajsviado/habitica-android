@@ -4,7 +4,6 @@ import com.habitrpg.android.habitica.HabiticaBaseApplication;
 import com.habitrpg.android.habitica.data.ApiClient;
 import com.habitrpg.android.habitica.helpers.RemindersManager;
 import com.habitrpg.android.habitica.helpers.SoundManager;
-import com.habitrpg.android.habitica.helpers.notifications.HabiticaFirebaseInstanceIDService;
 import com.habitrpg.android.habitica.helpers.notifications.HabiticaFirebaseMessagingService;
 import com.habitrpg.android.habitica.helpers.notifications.PushNotificationManager;
 import com.habitrpg.android.habitica.modules.ApiModule;
@@ -28,8 +27,9 @@ import com.habitrpg.android.habitica.ui.activities.IntroActivity;
 import com.habitrpg.android.habitica.ui.activities.LoginActivity;
 import com.habitrpg.android.habitica.ui.activities.MainActivity;
 import com.habitrpg.android.habitica.ui.activities.MaintenanceActivity;
-import com.habitrpg.android.habitica.ui.activities.PartyInviteActivity;
+import com.habitrpg.android.habitica.ui.activities.GroupInviteActivity;
 import com.habitrpg.android.habitica.ui.activities.PrefsActivity;
+import com.habitrpg.android.habitica.ui.activities.ReportMessageActivity;
 import com.habitrpg.android.habitica.ui.activities.SetupActivity;
 import com.habitrpg.android.habitica.ui.activities.SkillMemberActivity;
 import com.habitrpg.android.habitica.ui.activities.SkillTasksActivity;
@@ -41,6 +41,7 @@ import com.habitrpg.android.habitica.ui.adapter.tasks.HabitsRecyclerViewAdapter;
 import com.habitrpg.android.habitica.ui.adapter.tasks.RewardsRecyclerViewAdapter;
 import com.habitrpg.android.habitica.ui.adapter.tasks.TodosRecyclerViewAdapter;
 import com.habitrpg.android.habitica.ui.fragments.AboutFragment;
+import com.habitrpg.android.habitica.ui.fragments.AchievementsFragment;
 import com.habitrpg.android.habitica.ui.fragments.GemsPurchaseFragment;
 import com.habitrpg.android.habitica.ui.fragments.NavigationDrawerFragment;
 import com.habitrpg.android.habitica.ui.fragments.NewsFragment;
@@ -74,6 +75,7 @@ import com.habitrpg.android.habitica.ui.fragments.skills.SkillsFragment;
 import com.habitrpg.android.habitica.ui.fragments.social.ChatFragment;
 import com.habitrpg.android.habitica.ui.fragments.social.ChatListFragment;
 import com.habitrpg.android.habitica.ui.fragments.social.GroupInformationFragment;
+import com.habitrpg.android.habitica.ui.fragments.social.GuildDetailFragment;
 import com.habitrpg.android.habitica.ui.fragments.social.GuildFragment;
 import com.habitrpg.android.habitica.ui.fragments.social.GuildsOverviewFragment;
 import com.habitrpg.android.habitica.ui.fragments.social.InboxFragment;
@@ -128,7 +130,7 @@ public interface AppComponent {
 
     void inject(MaintenanceActivity maintenanceActivity);
 
-    void inject(PartyInviteActivity partyInviteActivity);
+    void inject(GroupInviteActivity groupInviteActivity);
 
     void inject(PrefsActivity prefsActivity);
 
@@ -137,8 +139,6 @@ public interface AppComponent {
     void inject(SkillTasksActivity skillTasksActivity);
 
     void inject(SkillMemberActivity skillMembersActivity);
-
-    void inject(TaskFormActivity taskFormActivity);
 
     void inject(TasksFragment tasksFragment);
 
@@ -262,8 +262,6 @@ public interface AppComponent {
 
     void inject(TaskAlarmBootReceiver taskAlarmBootReceiver);
 
-    void inject(HabiticaFirebaseInstanceIDService habiticaFirebaseInstanceIDService);
-
     void inject(HabiticaFirebaseMessagingService habiticaFirebaseMessagingService);
 
     void inject(BaseWidgetProvider baseWidgetProvider);
@@ -311,4 +309,12 @@ public interface AppComponent {
     void inject(@NotNull AboutFragment aboutFragment);
 
     void inject(@NotNull ChatBarView chatBarView);
+
+    void inject(@NotNull TaskFormActivity taskFormActivity);
+
+    void inject(@NotNull ReportMessageActivity reportMessageActivity);
+
+    void inject(@NotNull GuildDetailFragment guildDetailFragment);
+
+    void inject(@NotNull AchievementsFragment achievementsFragment);
 }

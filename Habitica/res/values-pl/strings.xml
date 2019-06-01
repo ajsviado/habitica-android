@@ -117,7 +117,7 @@
   <string name="sunday">Niedziela</string>
   <string name="levelup_header">Udało Ci się osiągnąć poziom 1%1$d!</string>
   <string name="levelup_detail">Wypełniając swoje cele życiowe, udało Ci się zyskać kolejny poziom i pełne uzdrowienie postaci!</string>
-  <string name="levelup_button">Hurra!</string>
+  <string name="onwards">Hurra!</string>
   <string name="faint_subtitle">Nie rozpaczaj!</string>
   <string name="faint_header">Możesz stracić całe Zdrowie!</string>
   <string name="faint_button">Uzupełnij Zdrowie &amp; Spróbuj jeszcze raz</string>
@@ -288,14 +288,14 @@
   <string name="feed_to_pet">Nakarm chowańca</string>
   <string name="hatch_egg">Wykluj za pomocą jaja</string>
   <string name="invite_party">Zaproś drużynę</string>
-  <string name="dialog_feeding">Nakarm %1$s %2$s</string>
+  <string name="dialog_feeding">Nakarm %s</string>
   <string name="use_animal">Użyj</string>
   <string name="feed">Nakarm</string>
   <string name="hatch_with">Wykluj za pomocą %s</string>
-  <string name="hatched_pet_title">Wyklułeś/as %1$s %2$s!</string>
+  <string name="hatched_pet_title">Wyklułeś/as %s!</string>
   <string name="close">Zamknij</string>
   <string name="share">Podziel się</string>
-  <string name="notification_pet_fed">Nakarmiłeś/aś %1$s %2$s!</string>
+  <string name="notification_pet_fed">Nakarmiłeś/aś %s!</string>
   <string name="notification_purchase">Kupiłeś %s</string>
   <string name="notification_purchase_reward">Kupiłeś nagrodę</string>
   <string name="sectionpets">Standardowe</string>
@@ -348,7 +348,7 @@
   <string name="share_using">Udostępnij używanie</string>
   <string name="share_levelup">Uzyskałem poziom %d w Habitice dzięki poprawie moich życiowych nawyków!</string>
   <string name="share_hatched">Właśnie wyklułem chowańca %1$s %2$s w Habitice dzięki wypełnianiu życiowych zadań!</string>
-  <string name="share_raised">Właśnie zyskałem wierzchowca %1$s %2$s w Habitice dzięki wypełnianiu życiowych zadań!</string>
+  <string name="share_raised">Właśnie zyskałem wierzchowca %1$s w Habitice dzięki wypełnianiu życiowych zadań!</string>
   <string name="open_in_store">Otwórz w sklepie Google Play</string>
   <string name="change_class_confirmation">Jesteś pewien, że chcesz zmienić klasę? Będzie to kosztować 3 kryształy.</string>
   <string name="change_class_equipment_warning">Ostrzeżenie: Nie będziesz nie będziesz mógł kupić wyposażenia dla klasy: %s</string>
@@ -592,6 +592,8 @@
   <string name="nevermind">Nieważne</string>
   <string name="resetting_account">Resetowanie konta</string>
   <string name="deleting_account">Usuwanie konta</string>
+  <string name="insufficientGold">Musisz wykonać więcej zadań, zanim będzie Cię stać na ten przedmiot!</string>
+  <string name="insufficientGoldTitle">Za mało złota</string>
   <string name="insufficientGems">Potrzebujesz więcej klejnotów by kupić ten przedmiot!</string>
   <string name="purchase_gems">Kup klejnoty</string>
   <string name="insufficientHourglasses">Potrzebujesz więcej Mistycznych Klepsydr, żeby kupić ten przedmiot!</string>

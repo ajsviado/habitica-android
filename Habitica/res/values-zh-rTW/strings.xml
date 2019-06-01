@@ -115,7 +115,7 @@
   <string name="friday">星期五</string>
   <string name="saturday">星期六</string>
   <string name="sunday">星期日</string>
-  <string name="levelup_button">吼啊~！</string>
+  <string name="onwards">吼啊~！</string>
   <string name="faint_subtitle">別失望！</string>
   <string name="faint_header">你沒有生命值了！</string>
   <string name="faint_button">補全生命值 &amp; 请重試</string>
@@ -294,15 +294,15 @@
   <string name="feed_to_pet">餵食寵物</string>
   <string name="hatch_egg">孵化寵物蛋</string>
   <string name="invite_party">隊伍邀請</string>
-  <string name="dialog_feeding">餵養%1$s %2$s用：</string>
+  <string name="dialog_feeding">餵養%s用：</string>
   <string name="use_animal">用</string>
   <string name="feed">餵</string>
   <string name="hatch_with">用 %s 孵化寵物</string>
-  <string name="hatched_pet_title">你孵化了一隻 %1$s %2$s！</string>
-  <string name="evolved_pet_title">你馴服了%1$s%2$s，讓我們騎上牠吧！</string>
+  <string name="hatched_pet_title">你孵化了一隻 %s！</string>
+  <string name="evolved_pet_title">你馴服了%s，讓我們騎上牠吧！</string>
   <string name="close">關閉</string>
   <string name="share">分享</string>
-  <string name="notification_pet_fed">你餵食了你的%1$s %2$s！</string>
+  <string name="notification_pet_fed">你餵食了你的%s！</string>
   <string name="notification_purchase">你購買了%s</string>
   <string name="notification_purchase_reward">你購買了一個獎勵</string>
   <string name="sectionpets">基本寵物</string>
@@ -351,7 +351,7 @@
   <string name="share_using">分享使用</string>
   <string name="share_levelup">我在Habitica中通過改善我現實生活中的習慣到達了%d級！</string>
   <string name="share_hatched">我剛剛在Habitica中通完成我現實生活中的任務孵化了一隻寵物%1$s %2$s！</string>
-  <string name="share_raised">我剛剛在Habitica中通完成我現實生活中的任務得到了一匹坐騎%1$s %2$s！</string>
+  <string name="share_raised">我剛剛在Habitica中通完成我現實生活中的任務得到了一匹坐騎%1$s！</string>
   <string name="open_in_store">開啟Play sotre</string>
   <string name="change_class_confirmation">你確定要變更職業嗎？這會花費3寶石。</string>
   <string name="change_class_equipment_warning">提示：你無法再購買%s職業的裝備了（已頂級）。</string>

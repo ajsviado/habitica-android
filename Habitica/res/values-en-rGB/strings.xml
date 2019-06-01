@@ -115,7 +115,7 @@
   <string name="friday">Friday</string>
   <string name="saturday">Saturday</string>
   <string name="sunday">Sunday</string>
-  <string name="levelup_button">Huzzah!</string>
+  <string name="onwards">Huzzah!</string>
   <string name="faint_subtitle">Don\'t despair!</string>
   <string name="faint_header">You ran out of Health!</string>
   <string name="faint_button">Refill Health &amp; Try Again</string>
@@ -285,14 +285,14 @@
   <string name="feed_to_pet">Feed to pet</string>
   <string name="hatch_egg">Hatch with egg</string>
   <string name="invite_party">Invite party</string>
-  <string name="dialog_feeding">Feed %1$s %2$s with:</string>
+  <string name="dialog_feeding">Feed %s with:</string>
   <string name="use_animal">Use</string>
   <string name="feed">Feed</string>
   <string name="hatch_with">Hatch pet with %s</string>
-  <string name="hatched_pet_title">You hatched a %1$s %2$s!</string>
+  <string name="hatched_pet_title">You hatched a %s!</string>
   <string name="close">Close</string>
   <string name="share">Share</string>
-  <string name="notification_pet_fed">You fed your %1$s %2$s!</string>
+  <string name="notification_pet_fed">You fed your %s!</string>
   <string name="world_quest">World Quest</string>
   <string name="empty_items">You don\'t have any %s</string>
   <string name="user_level">Lvl %d</string>
@@ -329,7 +329,7 @@
   <string name="share_using">Share using</string>
   <string name="share_levelup">I got to level %d in Habitica by improving my real-life habits!</string>
   <string name="share_hatched">I just hatched a %1$s %2$s pet in Habitica by completing my real-life tasks!</string>
-  <string name="share_raised">I just gained a %1$s %2$s mount in Habitica by completing my real-life tasks!</string>
+  <string name="share_raised">I just gained a %1$s mount in Habitica by completing my real-life tasks!</string>
   <string name="open_in_store">Open in Play Store</string>
   <string name="change_class_confirmation">Are you sure you want to change your class? This will cost 3 gems.</string>
   <string name="change_class_equipment_warning">Warning: You will no longer be able to buy equipment from the %s class.</string>

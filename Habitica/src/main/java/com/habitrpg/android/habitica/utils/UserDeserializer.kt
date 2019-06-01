@@ -1,11 +1,13 @@
 package com.habitrpg.android.habitica.utils
 
+import com.google.firebase.perf.FirebasePerformance
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.JsonParseException
 import com.google.gson.reflect.TypeToken
 import com.habitrpg.android.habitica.models.PushDevice
+import com.habitrpg.android.habitica.models.QuestAchievement
 import com.habitrpg.android.habitica.models.Tag
 import com.habitrpg.android.habitica.models.inventory.Quest
 import com.habitrpg.android.habitica.models.invitations.Invitations
@@ -21,6 +23,8 @@ import java.util.*
 class UserDeserializer : JsonDeserializer<User> {
     @Throws(JsonParseException::class)
     override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): User {
+        val deserializeTrace = FirebasePerformance.getInstance().newTrace("UserDeserialize")
+        deserializeTrace.start()
         val user = User()
         val obj = json.asJsonObject
 
@@ -114,12 +118,22 @@ class UserDeserializer : JsonDeserializer<User> {
         }
 
         if (obj.has("achievements")) {
-            if (obj.getAsJsonObject("achievements").has("streak")) {
+            val achievements = obj.getAsJsonObject("achievements")
+            if (achievements.has("streak")) {
                 try {
                     user.streakCount = obj.getAsJsonObject("achievements").get("streak").asInt
                 } catch (ignored: UnsupportedOperationException) {
                 }
-
+            }
+            if (achievements.has("quests")) {
+                val questAchievements = RealmList<QuestAchievement>()
+                for (entry in achievements.getAsJsonObject("quests").entrySet()) {
+                    val questAchievement = QuestAchievement()
+                    questAchievement.questKey = entry.key
+                    questAchievement.count = entry.value.asInt
+                    questAchievements.add(questAchievement)
+                }
+                user.questAchievements = questAchievements
             }
         }
 
@@ -132,7 +146,7 @@ class UserDeserializer : JsonDeserializer<User> {
                 user.abTests?.add(test)
             }
         }
-
+        deserializeTrace.stop()
         return user
     }
 }

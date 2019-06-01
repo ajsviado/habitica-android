@@ -117,7 +117,7 @@
   <string name="sunday">Pazar</string>
   <string name="levelup_header">%1$d. Seviyeye Yükseldin!</string>
   <string name="levelup_detail">Gerçek hayattaki hedeflerini gerçekleştirerek seviye atladın ve sağlığın yenilendi!</string>
-  <string name="levelup_button">Yaşasın!</string>
+  <string name="onwards">Yaşasın!</string>
   <string name="faint_subtitle">Umudunu kaybetme!</string>
   <string name="faint_penalty_body">Bir Seviye, Altınlarını ve bir parça Ekipman kaybettin, ama çok çalışarak hepsini yeniden kazanabilirsin! İyi şanslar—bu işi becereceksin.</string>
   <string name="faint_header">Sağlığın tükendi!</string>
@@ -296,15 +296,15 @@
   <string name="feed_to_pet">Evcil hayvana besle</string>
   <string name="hatch_egg">Yumurta ile üret</string>
   <string name="invite_party">Takımı davet et</string>
-  <string name="dialog_feeding">%1$s %2$s besle:</string>
+  <string name="dialog_feeding">%s besle:</string>
   <string name="use_animal">Kullan</string>
   <string name="feed">Besle</string>
   <string name="hatch_with">Evcil hayvanı %s ile üret</string>
-  <string name="hatched_pet_title">%1$s %2$s ürettin!</string>
-  <string name="evolved_pet_title">Bir %1$s %2$s ehlileştirdin.</string>
+  <string name="hatched_pet_title">%s ürettin!</string>
+  <string name="evolved_pet_title">Bir %s ehlileştirdin.</string>
   <string name="close">Kapat</string>
   <string name="share">Paylaş</string>
-  <string name="notification_pet_fed">%1$s %2$s besledin!</string>
+  <string name="notification_pet_fed">%s besledin!</string>
   <string name="notification_purchase">%s satın aldın</string>
   <string name="notification_purchase_reward">Bir ödül satın aldın</string>
   <string name="sectionpets">Standart</string>
@@ -359,7 +359,7 @@
   <string name="share_using">Kullanımı paylaş</string>
   <string name="share_levelup">Gerçek hayatımdaki alışkanlıklarımı geliştirerek Habitica içerisinde %d seviye elde ettim!</string>
   <string name="share_hatched">Gerçek hayatımdaki alışkanlıklarımı geliştirerek Habitica içerisinde %1$s %2$s evcil hayvan ürettim.</string>
-  <string name="share_raised">Gerçek hayatımdaki alışkanlıklarımı geliştirerek Habitica içerisinde %1$s %2$s binek kazandım.</string>
+  <string name="share_raised">Gerçek hayatımdaki alışkanlıklarımı geliştirerek Habitica içerisinde %1$s binek kazandım.</string>
   <string name="open_in_store">Play Store\'da aç</string>
   <string name="change_class_confirmation">Sınıfınızı değiştirmek istediğinize emin misiniz? Bu işlem 3 elmasa mal olacaktır.</string>
   <string name="change_class_equipment_warning">Uyarı: %s sınıfından ekipman alamayacaksınız.</string>

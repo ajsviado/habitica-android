@@ -3,8 +3,8 @@ package com.habitrpg.android.habitica.ui.fragments.tasks
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.FragmentPagerAdapter
 import android.view.*
+import androidx.fragment.app.FragmentPagerAdapter
 import com.github.clans.fab.FloatingActionButton
 import com.github.clans.fab.FloatingActionMenu
 import com.habitrpg.android.habitica.HabiticaBaseApplication
@@ -12,7 +12,6 @@ import com.habitrpg.android.habitica.R
 import com.habitrpg.android.habitica.components.AppComponent
 import com.habitrpg.android.habitica.data.TagRepository
 import com.habitrpg.android.habitica.events.TaskTappedEvent
-import com.habitrpg.android.habitica.extensions.notNull
 import com.habitrpg.android.habitica.helpers.RxErrorHandler
 import com.habitrpg.android.habitica.helpers.TaskFilterHelper
 import com.habitrpg.android.habitica.models.tasks.Task
@@ -72,6 +71,12 @@ class TasksFragment : BaseMainFragment() {
 
         loadTaskLists()
 
+        return v
+    }
+
+    override fun onResume() {
+        super.onResume()
+
         bottomNavigation?.setBadgesHideWhenActive(true)
         bottomNavigation?.setOnTabSelectListener { tabId ->
             when (tabId) {
@@ -82,8 +87,6 @@ class TasksFragment : BaseMainFragment() {
             }
             updateBottomBarBadges()
         }
-
-        return v
     }
 
     override fun onDestroy() {
@@ -113,25 +116,22 @@ class TasksFragment : BaseMainFragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-
-        when (id) {
+        return when (item.itemId) {
             R.id.action_search -> {
                 showFilterDialog()
-                return true
+                true
             }
             R.id.action_reload -> {
                 refreshItem = item
                 refresh()
-                return true
+                true
             }
+            else -> super.onOptionsItemSelected(item)
         }
-
-        return super.onOptionsItemSelected(item)
     }
 
     private fun showFilterDialog() {
-        context.notNull {
+        context?.let {
             val dialog = TaskFilterDialog(it, HabiticaBaseApplication.component)
             if (user != null) {
                 dialog.setTags(user?.tags?.createSnapshot() ?: emptyList())
@@ -281,13 +281,8 @@ class TasksFragment : BaseMainFragment() {
             return
         }
 
-        val allocationMode = user?.preferences?.hasTaskBasedAllocation() ?: false
-
         val bundle = Bundle()
         bundle.putString(TaskFormActivity.TASK_TYPE_KEY, type)
-        bundle.putString(TaskFormActivity.USER_ID_KEY, if (this.user != null) this.user?.id else null)
-        bundle.putBoolean(TaskFormActivity.ALLOCATION_MODE_KEY, allocationMode)
-        bundle.putBoolean(TaskFormActivity.SAVE_TO_DB, true)
 
         val intent = Intent(activity, TaskFormActivity::class.java)
         intent.putExtras(bundle)
@@ -304,14 +299,9 @@ class TasksFragment : BaseMainFragment() {
             return
         }
 
-        val allocationMode = user?.preferences?.hasTaskBasedAllocation() ?: false
-
         val bundle = Bundle()
         bundle.putString(TaskFormActivity.TASK_TYPE_KEY, event.Task.type)
         bundle.putString(TaskFormActivity.TASK_ID_KEY, event.Task.id)
-        bundle.putString(TaskFormActivity.USER_ID_KEY, if (this.user != null) this.user?.id else null)
-        bundle.putBoolean(TaskFormActivity.ALLOCATION_MODE_KEY, allocationMode)
-        bundle.putBoolean(TaskFormActivity.SAVE_TO_DB, true)
 
         val intent = Intent(activity, TaskFormActivity::class.java)
         intent.putExtras(bundle)

@@ -9,6 +9,7 @@ import com.habitrpg.android.habitica.R
 import com.habitrpg.android.habitica.components.AppComponent
 import com.habitrpg.android.habitica.extensions.notNull
 import com.habitrpg.android.habitica.ui.helpers.*
+import com.habitrpg.android.habitica.ui.views.HabiticaAutocompleteTextView
 
 class GroupFormActivity : BaseActivity() {
 
@@ -22,8 +23,8 @@ class GroupFormActivity : BaseActivity() {
 
     private val cancelButton: ImageButton by bindView(R.id.cancel_button)
     private val saveButton: Button by bindView(R.id.save_button)
-    private val groupNameEditText: MultiAutoCompleteTextView by bindView(R.id.group_name_edittext)
-    private val groupDescriptionEditText: MultiAutoCompleteTextView by bindView(R.id.group_description_edittext)
+    private val groupNameEditText: HabiticaAutocompleteTextView by bindView(R.id.group_name_edittext)
+    private val groupDescriptionEditText: HabiticaAutocompleteTextView by bindView(R.id.group_description_edittext)
     private val leaderCreateChallengeSwitch: Switch by bindView(R.id.leader_create_challenge_switch)
     private val privacyWrapper: LinearLayout by bindView(R.id.privacyWrapper)
     internal val privacySpinner: Spinner by bindView(R.id.privacySpinner)
@@ -59,7 +60,7 @@ class GroupFormActivity : BaseActivity() {
 
         cancelButton.setOnClickListener {
             finish()
-            KeyboardUtil.dismissKeyboard(this)
+            dismissKeyboard()
         }
 
         saveButton.setOnClickListener {
@@ -91,19 +92,23 @@ class GroupFormActivity : BaseActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         finish()
-        KeyboardUtil.dismissKeyboard(this)
+        dismissKeyboard()
         return true
     }
 
     override fun onBackPressed() {
         finish()
-        KeyboardUtil.dismissKeyboard(this)
+        dismissKeyboard()
     }
 
     private fun finishActivitySuccessfuly() {
+        val name = groupNameEditText.text.toString()
+        if (name.isEmpty()) {
+            return
+        }
         val resultIntent = Intent()
         val bundle = Bundle()
-        bundle.putString("name", this.groupNameEditText.text.toString())
+        bundle.putString("name", name)
         bundle.putString("groupType", groupType)
         bundle.putString("description", MarkdownParser.parseCompiled(this.groupDescriptionEditText.text))
         bundle.putBoolean("leaderCreateChallenge", leaderCreateChallengeSwitch.isActivated)
@@ -111,7 +116,7 @@ class GroupFormActivity : BaseActivity() {
         resultIntent.putExtras(bundle)
         setResult(Activity.RESULT_OK, resultIntent)
         finish()
-        KeyboardUtil.dismissKeyboard(this)
+        dismissKeyboard()
     }
 
     companion object {

@@ -1,8 +1,8 @@
 package com.habitrpg.android.habitica.data.implementation
 
 import android.content.Context
-import androidx.appcompat.app.AlertDialog
 import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import com.amplitude.api.Amplitude
 import com.google.gson.JsonSyntaxException
 import com.habitrpg.android.habitica.BuildConfig
@@ -201,6 +201,10 @@ class ApiClientImpl//private OnHabitsAPIResult mResultListener;
                 return
             }
 
+            if (status == 404) {
+                return
+            }
+
             if (status in 400..499) {
                 if (res.displayMessage.isNotEmpty()) {
                     showConnectionProblemDialog("", res.displayMessage)
@@ -256,19 +260,16 @@ class ApiClientImpl//private OnHabitsAPIResult mResultListener;
     }
 
     private fun showConnectionProblemDialog(resourceMessageString: Int) {
-        showConnectionProblemDialog(R.string.network_error_title, resourceMessageString)
+        showConnectionProblemDialog(null, context.getString(resourceMessageString))
     }
 
     private fun showConnectionProblemDialog(resourceTitleString: Int, resourceMessageString: Int) {
         showConnectionProblemDialog(context.getString(resourceTitleString), context.getString(resourceMessageString))
     }
 
-    private fun showConnectionProblemDialog(resourceTitleString: String, resourceMessageString: String) {
+    private fun showConnectionProblemDialog(resourceTitleString: String?, resourceMessageString: String) {
         val event = ShowConnectionProblemEvent(resourceTitleString, resourceMessageString)
         EventBus.getDefault().post(event)
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "showConnectionProblemDialog: $resourceTitleString $resourceMessageString")
-        }
     }
 
     /*
@@ -520,8 +521,8 @@ class ApiClientImpl//private OnHabitsAPIResult mResultListener;
         return apiService.likeMessage(groupId, mid).compose(configureApiCallObserver())
     }
 
-    override fun flagMessage(groupId: String, mid: String): Flowable<Void> {
-        return apiService.flagMessage(groupId, mid).compose(configureApiCallObserver())
+    override fun flagMessage(groupId: String, mid: String, data: MutableMap<String, String>): Flowable<Void> {
+        return apiService.flagMessage(groupId, mid, data).compose(configureApiCallObserver())
     }
 
     override fun seenMessages(groupId: String): Flowable<Void> {
@@ -585,7 +586,7 @@ class ApiClientImpl//private OnHabitsAPIResult mResultListener;
         return apiService.getMemberWithUsername(username).compose(configureApiCallObserver())
     }
 
-    override fun getMemberAchievements(memberId: String): Flowable<AchievementResult> {
+    override fun getMemberAchievements(memberId: String): Flowable<List<Achievement>> {
         return apiService.getMemberAchievements(memberId).compose(configureApiCallObserver())
     }
 
@@ -719,11 +720,11 @@ class ApiClientImpl//private OnHabitsAPIResult mResultListener;
         return apiService.updateEmail(updateObject).compose(configureApiCallObserver())
     }
 
-    override fun updatePassword(newPassword: String, oldPassword: String, oldPasswordConfirmation: String): Flowable<Void> {
+    override fun updatePassword(oldPassword: String, newPassword: String, newPasswordConfirmation: String): Flowable<Void> {
         val updateObject = HashMap<String, String>()
-        updateObject["newPassword"] = newPassword
         updateObject["password"] = oldPassword
-        updateObject["confirmPassowrd"] = oldPasswordConfirmation
+        updateObject["newPassword"] = newPassword
+        updateObject["confirmPassword"] = newPasswordConfirmation
         return apiService.updatePassword(updateObject).compose(configureApiCallObserver())
     }
 

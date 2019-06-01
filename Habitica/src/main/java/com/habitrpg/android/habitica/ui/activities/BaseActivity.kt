@@ -1,19 +1,21 @@
 package com.habitrpg.android.habitica.ui.activities
 
+import android.content.res.Configuration
 import android.os.Bundle
-import android.view.MotionEvent
-import androidx.appcompat.app.AlertDialog
+import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import com.habitrpg.android.habitica.HabiticaApplication
 import com.habitrpg.android.habitica.HabiticaBaseApplication
-import com.habitrpg.android.habitica.R
 import com.habitrpg.android.habitica.components.AppComponent
 import com.habitrpg.android.habitica.events.ShowConnectionProblemEvent
-import com.instabug.library.InstabugTrackingDelegate
+import com.habitrpg.android.habitica.helpers.LanguageHelper
+import com.habitrpg.android.habitica.ui.views.HabiticaAlertDialog
 import io.reactivex.disposables.CompositeDisposable
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import java.util.*
 
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -29,16 +31,19 @@ abstract class BaseActivity : AppCompatActivity() {
 
     var isActivityVisible = false
 
-    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        InstabugTrackingDelegate.notifyActivityGotTouchEvent(ev, this)
-        return super.dispatchTouchEvent(ev)
-    }
-
     override fun isDestroyed(): Boolean {
         return destroyed
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val languageHelper = LanguageHelper(sharedPreferences.getString("language", "en"))
+        Locale.setDefault(languageHelper.locale)
+        val configuration = Configuration()
+        configuration.setLocale(languageHelper.locale)
+        resources.updateConfiguration(configuration, resources.displayMetrics)
+
+        delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
         habiticaApplication
         injectActivity(HabiticaBaseApplication.component)
@@ -95,16 +100,11 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     @Subscribe
-    fun onEvent(event: ShowConnectionProblemEvent) {
-        val builder = AlertDialog.Builder(this)
-                .setTitle(event.title)
-                .setMessage(event.message)
-                .setNeutralButton(android.R.string.ok) { _, _ -> }
-
-        if (!event.title.isEmpty()) {
-            builder.setIcon(R.drawable.ic_warning_black)
-        }
-
-        builder.show()
+    open fun onEvent(event: ShowConnectionProblemEvent) {
+        val alert = HabiticaAlertDialog(this)
+        alert.setTitle(event.title)
+        alert.setMessage(event.message)
+        alert.addButton(android.R.string.ok, true, null)
+        alert.show()
     }
 }

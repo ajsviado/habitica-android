@@ -117,7 +117,7 @@
   <string name="sunday">Воскресенье</string>
   <string name="levelup_header">Вы достигли %1$d уровня!</string>
   <string name="levelup_detail">Благодаря выполнению своих целей в реальной жизни вы получили уровень и восполнили полностью здоровье!</string>
-  <string name="levelup_button">Ура!</string>
+  <string name="onwards">Ура!</string>
   <string name="faint_subtitle">Не отчаивайтесь!</string>
   <string name="faint_penalty_body">Вы потеряли Уровень, Золото и предмет Экипировки, но вы  сможете все вернуть, если продолжите выполнять задачи! Удачи! Вы справитесь!</string>
   <string name="faint_header">У вас закончилось здоровье!</string>
@@ -294,15 +294,15 @@
   <string name="feed_to_pet">Покормить питомца</string>
   <string name="hatch_egg">Вывести питомца из яйца</string>
   <string name="invite_party">Пригласить команду</string>
-  <string name="dialog_feeding">Покормить %1$s %2$s:</string>
+  <string name="dialog_feeding">Покормить %s:</string>
   <string name="use_animal">Использовать</string>
   <string name="feed">Покормить</string>
   <string name="hatch_with">Вылупить питомца с помощью %s</string>
-  <string name="hatched_pet_title">У вас вылупился %1$s %2$s!</string>
-  <string name="evolved_pet_title">Вы приручили %1$s%2$s, пора покататься! </string>
+  <string name="hatched_pet_title">У вас вылупился %s!</string>
+  <string name="evolved_pet_title">"Вы приручили %s, пора покататься! "</string>
   <string name="close">Закрыть</string>
   <string name="share">Поделиться</string>
-  <string name="notification_pet_fed">Вы покормили вашего %1$s %2$s!</string>
+  <string name="notification_pet_fed">Вы покормили вашего %s!</string>
   <string name="notification_purchase">Вы купили %s</string>
   <string name="notification_purchase_reward">Вы купили награду</string>
   <string name="sectionpets">Обычные</string>
@@ -357,7 +357,7 @@
   <string name="share_using">Поделиться с помощью</string>
   <string name="share_levelup">Я достиг %d уровня в Habitica, улучшая привычки в реальной жизни!</string>
   <string name="share_hatched">У меня только что вылупился питомец %1$s %2$s в Habitica, потому что я выполнял задачи в реальной жизни!</string>
-  <string name="share_raised">Я только что получил скакуна %1$s %2$s в Habitica, выполняя задачи в реальной жизни!</string>
+  <string name="share_raised">Я только что получил скакуна %1$s в Habitica, выполняя задачи в реальной жизни!</string>
   <string name="open_in_store">Откройте в Play маркет</string>
   <string name="change_class_confirmation">Вы уверены что хотите поменять класс? Это стоит 3 самоцвета.</string>
   <string name="change_class_equipment_warning">Внимание: вы больше не можете покупать снаряжение класса %s.</string>

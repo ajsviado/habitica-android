@@ -117,7 +117,7 @@
   <string name="sunday">Sonntag</string>
   <string name="levelup_header">Du hast Level %1$d erreicht!</string>
   <string name="levelup_detail">Durch das Erfüllen Deiner Lebensziele bist du ein Level aufgestiegen und bist nun vollständig geheilt!</string>
-  <string name="levelup_button">Hurra!</string>
+  <string name="onwards">Hurra!</string>
   <string name="faint_subtitle">Nicht verzweifeln!</string>
   <string name="faint_penalty_body">Du hast ein Level, dein Gold und ein Teil deiner Ausrüstung verloren, aber du kannst, mit harter Arbeit alles wieder zurückbekommen! Viel Glück - Du schaffst das.</string>
   <string name="faint_header">Du hast alle Deine Lebenspunkte verloren!</string>
@@ -296,15 +296,15 @@
   <string name="feed_to_pet">An Haustier verfüttern</string>
   <string name="hatch_egg">Mit Ei ausbrüten</string>
   <string name="invite_party">Party einladen</string>
-  <string name="dialog_feeding">Füttere %1$s %2$s mit:</string>
+  <string name="dialog_feeding">Füttere %s mit:</string>
   <string name="use_animal">Nutzen</string>
   <string name="feed">Füttern</string>
   <string name="hatch_with">Haustier mit %s ausbrüten</string>
-  <string name="hatched_pet_title">Du hast ein %1$s %2$s ausgebrütet!</string>
-  <string name="evolved_pet_title">Du hast %1$s%2$s gezähmt, auf geht\'s!</string>
+  <string name="hatched_pet_title">Du hast ein %s ausgebrütet!</string>
+  <string name="evolved_pet_title">Du hast %s gezähmt, auf geht\'s!</string>
   <string name="close">Schließen</string>
   <string name="share">Teilen</string>
-  <string name="notification_pet_fed">Du hast Dein/e/n %1$s %2$s gefüttert!</string>
+  <string name="notification_pet_fed">Du hast Dein/e/n %s gefüttert!</string>
   <string name="notification_purchase">Du hast %s gekauft</string>
   <string name="notification_purchase_reward">Du hast eine Belohnung gekauft</string>
   <string name="sectionpets">Standard</string>
@@ -359,7 +359,7 @@
   <string name="share_using">Teilen via</string>
   <string name="share_levelup">Ich habe durch das Verbessern meiner realen Lebensgewohnheiten Level %d in Habitica erreicht!</string>
   <string name="share_hatched">Durch das Erfüllen meiner Real-Life-Aufgaben habe ich ein %1$s %2$s Haustier in Habitica ausgebrütet!</string>
-  <string name="share_raised">Durch das Erfüllen meiner Real-Life-Aufgaben habe ich ein %1$s %2$s Reittier in Habitica erhalten!</string>
+  <string name="share_raised">Durch das Erfüllen meiner Real-Life-Aufgaben habe ich ein %1$s Reittier in Habitica erhalten!</string>
   <string name="open_in_store">Im Play Store öffnen</string>
   <string name="change_class_confirmation">Bist Du sicher, dass Du Deine Klasse ändern willst? Es kostet 3 Edelsteine.</string>
   <string name="change_class_equipment_warning">Warnung: Du wirst nicht mehr Ausrüstung für die %s Klasse kaufen können.</string>
@@ -626,6 +626,7 @@ Die Quest-Schriftrolle wird an den Quest-Besitzer zurückgegeben.</string>
   <string name="resetting_account">Konto zurücksetzen</string>
   <string name="deleting_account">Konto löschen</string>
   <string name="insufficientGold">Du musst mehr Aufgaben erledigen bevor du Dir dieses Item leisten kannst!</string>
+  <string name="insufficientGoldTitle">Nicht genug Gold</string>
   <string name="insufficientGems">Du wirst mehr Edelsteine benötigen um dieses Item zu kaufen!</string>
   <string name="purchase_gems">Kaufe Edelsteine</string>
   <string name="insufficientHourglasses">Du wirst mehr mystische Sanduhren benötigen um dieses Item zu kaufen!</string>

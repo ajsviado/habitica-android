@@ -7,7 +7,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.DialogFragment
 import com.habitrpg.android.habitica.HabiticaBaseApplication
@@ -15,6 +14,7 @@ import com.habitrpg.android.habitica.R
 import com.habitrpg.android.habitica.data.InventoryRepository
 import com.habitrpg.android.habitica.data.SocialRepository
 import com.habitrpg.android.habitica.data.UserRepository
+import com.habitrpg.android.habitica.extensions.getThemeColor
 import com.habitrpg.android.habitica.extensions.notNull
 import com.habitrpg.android.habitica.helpers.RxErrorHandler
 import com.habitrpg.android.habitica.models.inventory.Quest
@@ -78,8 +78,8 @@ class NavigationDrawerFragment : DialogFragment() {
         if (quest == null || questContent == null || !quest.active) {
             questMenuView.visibility = View.GONE
             context.notNull {
-                adapter.tintColor = ContextCompat.getColor(it, R.color.brand_300)
-                adapter.backgroundTintColor = ContextCompat.getColor(it, R.color.brand_200)
+                adapter.tintColor = it.getThemeColor(R.attr.colorPrimary)
+                adapter.backgroundTintColor = it.getThemeColor(R.attr.colorPrimaryOffset)
             }
             adapter.items.filter { it.identifier == SIDEBAR_TAVERN }.forEach {
                 it.additionalInfo = null
@@ -125,7 +125,7 @@ class NavigationDrawerFragment : DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val context = context
         adapter = if (context != null) {
-            NavigationDrawerAdapter(ContextCompat.getColor(context, R.color.brand_300), ContextCompat.getColor(context, R.color.brand_200))
+            NavigationDrawerAdapter(context.getThemeColor(R.attr.colorPrimary), context.getThemeColor(R.attr.colorPrimaryOffset))
         } else {
             NavigationDrawerAdapter(0, 0)
         }
@@ -208,6 +208,7 @@ class NavigationDrawerFragment : DialogFragment() {
             items.add(HabiticaDrawerItem(R.id.tasksFragment, SIDEBAR_TASKS, context.getString(R.string.sidebar_tasks)))
             items.add(HabiticaDrawerItem(R.id.skillsFragment, SIDEBAR_SKILLS, context.getString(R.string.sidebar_skills)))
             items.add(HabiticaDrawerItem(R.id.statsFragment, SIDEBAR_STATS, context.getString(R.string.sidebar_stats)))
+            items.add(HabiticaDrawerItem(R.id.achievementsFragment, SIDEBAR_ACHIEVEMENTS, context.getString(R.string.sidebar_achievements)))
             items.add(HabiticaDrawerItem(0, SIDEBAR_SOCIAL, context.getString(R.string.sidebar_section_social), true))
             items.add(HabiticaDrawerItem(R.id.tavernFragment, SIDEBAR_TAVERN, context.getString(R.string.sidebar_tavern), false, false))
             items.add(HabiticaDrawerItem(R.id.partyFragment, SIDEBAR_PARTY, context.getString(R.string.sidebar_party)))
@@ -245,7 +246,7 @@ class NavigationDrawerFragment : DialogFragment() {
     }
 
     /**
-     * Users of this fragment must call this method to set up the navigation drawer interactions.
+     * Users of this fragment must call this method to set UP the navigation drawer interactions.
      *
      * @param fragmentId   The android:id of this fragment in its activity's layout.
      * @param drawerLayout The DrawerLayout containing this fragment's UI.
@@ -256,7 +257,7 @@ class NavigationDrawerFragment : DialogFragment() {
 
         // set a custom shadow that overlays the main content when the drawer opens
         this.drawerLayout?.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START)
-        // set up the drawer's list view with items and click listener
+        // set UP the drawer's list view with items and click listener
     }
 
     fun openDrawer() {
@@ -327,6 +328,7 @@ class NavigationDrawerFragment : DialogFragment() {
         const val SIDEBAR_TASKS = "tasks"
         const val SIDEBAR_SKILLS = "skills"
         const val SIDEBAR_STATS = "stats"
+        const val SIDEBAR_ACHIEVEMENTS = "achievements"
         const val SIDEBAR_SOCIAL = "social"
         const val SIDEBAR_INBOX = "inbox"
         const val SIDEBAR_TAVERN = "tavern"

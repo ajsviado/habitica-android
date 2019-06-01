@@ -4,24 +4,23 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
-import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AlertDialog
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.habitrpg.android.habitica.R
 import com.habitrpg.android.habitica.components.AppComponent
 import com.habitrpg.android.habitica.data.InventoryRepository
 import com.habitrpg.android.habitica.data.SocialRepository
 import com.habitrpg.android.habitica.data.UserRepository
-import com.habitrpg.android.habitica.extensions.backgroundCompat
 import com.habitrpg.android.habitica.extensions.notNull
+import com.habitrpg.android.habitica.helpers.AppConfigManager
 import com.habitrpg.android.habitica.helpers.MainNavigationController
-import com.habitrpg.android.habitica.helpers.RemoteConfigManager
 import com.habitrpg.android.habitica.helpers.RxErrorHandler
 import com.habitrpg.android.habitica.models.inventory.QuestContent
 import com.habitrpg.android.habitica.models.members.PlayerTier
@@ -48,7 +47,7 @@ class TavernDetailFragment : BaseFragment() {
     @field:[Inject Named(AppModule.NAMED_USER_ID)]
     lateinit var userId: String
     @Inject
-    lateinit var configManager: RemoteConfigManager
+    lateinit var configManager: AppConfigManager
 
     private var shopSpriteSuffix = ""
 
@@ -114,7 +113,7 @@ class TavernDetailFragment : BaseFragment() {
     }
 
     private fun bindButtons() {
-        innButton.setOnClickListener { _ ->
+        innButton.setOnClickListener {
             user?.notNull { user -> userRepository.sleep(user).subscribe(Consumer { }, RxErrorHandler.handleEmptyError()) }
         }
         guidelinesButton.setOnClickListener {
@@ -154,7 +153,7 @@ class TavernDetailFragment : BaseFragment() {
         for (tier in PlayerTier.getTiers()) {
             context.notNull {
                 val container = FrameLayout(it)
-                container.backgroundCompat = ContextCompat.getDrawable(it, R.drawable.layout_rounded_bg_gray_700)
+                container.background = ContextCompat.getDrawable(it, R.drawable.layout_rounded_bg_gray_700)
                 val label = UsernameLabel(context, null)
                 label.tier = tier.id
                 label.username = tier.title
@@ -181,8 +180,7 @@ class TavernDetailFragment : BaseFragment() {
             val alert = HabiticaAlertDialog(context)
             val bossName = quest.boss?.name ?: ""
             alert.setTitle(R.string.world_boss_description_title)
-            alert.setTitleBackgroundColor(quest.colors?.lightColor ?: 0)
-            alert.setSubtitle(context.getString(R.string.world_boss_description_subtitle, bossName))
+            //alert.setSubtitle(context.getString(R.string.world_boss_description_subtitle, bossName))
             alert.setAdditionalContentView(R.layout.world_boss_description_view)
 
             val descriptionView = alert.getContentView()
@@ -191,7 +189,7 @@ class TavernDetailFragment : BaseFragment() {
             promptView?.setTextColor(quest.colors?.lightColor ?: 0)
             val background = ContextCompat.getDrawable(context, R.drawable.rounded_border)
             background?.setColorFilter(quest.colors?.extraLightColor ?: 0, PorterDuff.Mode.MULTIPLY)
-            promptView?.backgroundCompat = background
+            promptView?.background = background
 
             alert.setButton(AlertDialog.BUTTON_POSITIVE, context.getString(R.string.close)) { dialog, _ ->
                 dialog.dismiss()
